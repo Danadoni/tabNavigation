@@ -1,20 +1,71 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import Home from './src/paginas/home/'
+import Sobre from './src/paginas/sobre/'
+import Contato from './src/paginas/contato'
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons } from '@expo/vector-icons'; 
+import { AntDesign } from '@expo/vector-icons'; 
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+
+
+
+  
+      <NavigationContainer>
+
+       <Tab.Navigator 
+       initialRouteName='Sobre'
+       screenOptions={{headerShown:false,
+        tabBarActiveTintColor:"red",
+        tabBarInactiveTintColor:'blue',
+        tabBarStyle:{
+          backgroundColor:"black"
+
+        }
+
+      }}
+
+       >
+
+          <Tab.Screen name = "Home" component={Home} 
+          options = 
+          {{tabBarIcon: ({color,size}) => {
+
+          return   <Ionicons name="home-sharp" size={size} color={color}/>
+          } 
+          
+          }}/>
+          <Tab.Screen name ="Contato" component ={Contato}
+           options = 
+           {{tabBarIcon: ({color,size}) => {
+ 
+           return   <AntDesign name="contacts" size={size} color={color} />
+           } }}
+          
+          ></Tab.Screen>
+          <Tab.Screen name = "Sobre" component={Sobre}
+          
+          options =
+          {{
+            tabBarIcon:({color,size}) => {
+              return <Ionicons name="information-circle-outline" size={size} color={color} />
+            }
+          }}
+          
+          ></Tab.Screen>
+
+
+
+        </Tab.Navigator>   
+
+      </NavigationContainer>
+
+
+   
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
